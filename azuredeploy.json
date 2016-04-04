@@ -5,20 +5,19 @@
     "newStorageAccountName": {
       "type": "string",
       "metadata": {
-        "description": "Unique DNS Name Prefix for the Storage Account where the Virtual Machine's disks will be placed.  StorageAccounts may contain at most variables('vmsPerStorageAccount'). Storage account name must be between 3 and 24 characters in length and use numbers and lower-case letters only."
+        "description": "The name of the new storage account created to store the VMs disks. Name must be between 3 and 24 characters and use lowercase alphanumeric only."
       }
     },
     "adminPassword": {
       "type": "securestring",
       "metadata": {
-        "description": "Password for user: vagrant"
+        "description": "Administrator password. Username is 'vagrant'."
       }
     },
     "dnsNameForPublicIP": {
       "type": "string",
-      "defaultValue": "openedx-dns-name",
       "metadata": {
-        "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
+        "description": "Unique DNS name for the Public IP used to access the Virtual Machine."
       }
     },
     "vmSize": {
@@ -35,11 +34,12 @@
         "Standard_D14"
       ],
       "metadata": {
-        "description": "The VM role size of the jump box"
+        "description": "Virtual machine size."
       }
     }
   },
   "variables": {
+    "apiVersion": "2016-03-01",
     "adminUsername": "vagrant",
     "vmName": "jumpbox2",
     "availabilitySetNodes": "avail-set",
@@ -69,21 +69,21 @@
     {
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[parameters('newStorageAccountName')]",
-      "apiVersion": "2015-05-01-preview",
+      "apiVersion": "[variables('apiVersion')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "accountType": "[variables('storageAccountType')]"
       }
     },
     {
-      "apiVersion": "2015-06-15",
+      "apiVersion": "[variables('apiVersion')]",
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[variables('availabilitySetNodes')]",
       "location": "[resourceGroup().location]",
       "properties": {}
     },
     {
-      "apiVersion": "2015-06-15",
+      "apiVersion": "[variables('apiVersion')]",
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('publicIPAddressName')]",
       "location": "[resourceGroup().location]",
@@ -95,7 +95,7 @@
       }
     },
     {
-      "apiVersion": "2015-06-15",
+      "apiVersion": "[variables('apiVersion')]",
       "type": "Microsoft.Network/virtualNetworks",
       "name": "[variables('virtualNetworkName')]",
       "location": "[resourceGroup().location]",
@@ -122,7 +122,7 @@
       }
     },
     {
-      "apiVersion": "2015-06-15",
+      "apiVersion": "[variables('apiVersion')]",
       "type": "Microsoft.Network/networkSecurityGroups",
       "name": "[variables('nsgName')]",
       "location": "[resourceGroup().location]",
@@ -145,7 +145,7 @@
           {
             "name": "LMS",
             "properties": {
-              "description": "Allow connection to Open edX LMS",
+              "description": "HTTP for Open edX LMS",
               "protocol": "Tcp",
               "sourcePortRange": "*",
               "destinationPortRange": "8000",
@@ -159,7 +159,7 @@
           {
             "name": "CMS",
             "properties": {
-              "description": "Allow connection to Open edX CMS",
+              "description": "HTTP for Open edX CMS",
               "protocol": "Tcp",
               "sourcePortRange": "*",
               "destinationPortRange": "8001",
@@ -174,7 +174,7 @@
       }
     },
     {
-      "apiVersion": "2015-06-15",
+      "apiVersion": "[variables('apiVersion')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[concat(variables('vmName'), '-nic')]",
       "location": "[resourceGroup().location]",
@@ -200,7 +200,7 @@
       }
     },
     {
-      "apiVersion": "2015-06-15",
+      "apiVersion": "[variables('apiVersion')]",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[variables('vmName')]",
       "location": "[resourceGroup().location]",
@@ -249,7 +249,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(variables('vmName'), '/configuremaster')]",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "[variables('apiVersion')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
         "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
