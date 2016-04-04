@@ -1,11 +1,16 @@
 # Open edX Devstack on Azure
 
-This is an Azure template to create an Ubuntu VM and provision the Open edX devstack. You can learn more about Open edX and devstack here:
+This is an Azure template to create an Ubuntu VM and provision the Open edX devstack.
+
+You can learn more about Open edX and devstack here:
 - https://open.edx.org
 - https://github.com/edx/edx-platform
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ftkeemon%2Fopenedx-azure-devstack%2Fmaster%2Fazuredeploy.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fchenriksson%2Fopenedx-azure-devstack%2Ftest%2Fazuredeploy.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
+</a>
+<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Fchenriksson%2Fopenedx-azure-devstack%2Ftest%2Fazuredeploy.json" target="_blank">
+    <img src="http://armviz.io/visualizebutton.png"/>
 </a>
 
 This template will complete quickly, but the full Open edX install usually takes > 1 hour. To follow along with the progress, ssh into the VM and `tail -f openedx-devstack-install.log`
