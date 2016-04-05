@@ -42,7 +42,6 @@
     "apiVersion": "2016-03-01",
     "adminUsername": "vagrant",
     "vmName": "jumpbox2",
-    "availabilitySetNodes": "avail-set",
     "osImagePublisher": "Canonical",
     "osImageOffer": "UbuntuServer",
     "osImageSKU" : "12.04.5-LTS",
@@ -74,13 +73,6 @@
       "properties": {
         "accountType": "[variables('storageAccountType')]"
       }
-    },
-    {
-      "apiVersion": "[variables('apiVersion')]",
-      "type": "Microsoft.Compute/availabilitySets",
-      "name": "[variables('availabilitySetNodes')]",
-      "location": "[resourceGroup().location]",
-      "properties": {}
     },
     {
       "apiVersion": "[variables('apiVersion')]",
@@ -206,13 +198,9 @@
       "location": "[resourceGroup().location]",
       "dependsOn": [
         "[concat('Microsoft.Storage/storageAccounts/', parameters('newStorageAccountName'))]",
-        "[concat('Microsoft.Network/networkInterfaces/', variables('vmName'), '-nic')]",
-        "[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetNodes'))]"
+        "[concat('Microsoft.Network/networkInterfaces/', variables('vmName'), '-nic')]"
       ],
       "properties": {
-        "availabilitySet": {
-          "id": "[resourceId('Microsoft.Compute/availabilitySets',variables('availabilitySetNodes'))]"
-        },
         "hardwareProfile": {
           "vmSize": "[parameters('vmSize')]"
         },
