@@ -43,7 +43,7 @@
     "openedxVersion": "named-release/dogwood",
     "scriptDownloadUri": "https://raw.githubusercontent.com/chenriksson/openedx-azure-devstack/contribute/",
     "installScript": "configure-openedx.sh",
-    "installCommand": "echo test",
+    "installCommand": "[concat('sh ', variables('installScript'), ' > /var/log/azure/openedx-devstack-install.log 2>&1 &')]",
     "adminUsername": "vagrant",
     "vmName": "jumpbox2",
     "osImagePublisher": "Canonical",
