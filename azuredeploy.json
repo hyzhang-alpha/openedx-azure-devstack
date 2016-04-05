@@ -41,8 +41,9 @@
   "variables": {
     "apiVersion": "2016-03-01",
     "openedxVersion": "named-release/dogwood",
-    "templateUri": "https://raw.githubusercontent.com/chenriksson/openedx-azure-devstack/contribute/",
+    "scriptDownloadUri": "https://raw.githubusercontent.com/chenriksson/openedx-azure-devstack/contribute/",
     "installScript": "configure-openedx.sh",
+    "installCommand": "echo test",
     "adminUsername": "vagrant",
     "vmName": "jumpbox2",
     "osImagePublisher": "Canonical",
@@ -50,10 +51,6 @@
     "osImageSKU" : "12.04.5-LTS",
     "publicIPAddressName": "myPublicIP",
     "publicIPAddressType": "Dynamic",
-    "customScriptLocation": "https://raw.githubusercontent.com/tkeemon/openedx-azure-devstack/master/",
-    "wgetCommandPrefix": "[concat('wget --tries 20 --retry-connrefused --waitretry=15 -qO- ', variables('customScriptLocation'), 'configure-openedx.sh | nohup /bin/bash -s ')]",
-    "wgetCommandPostfix":  " > /var/log/azure/openedx-devstack-install.log 2>&1 &'",
-    "commandPrefix": "/bin/bash -c '",
     "OSDiskName": "osdisk",
     "nicName": "vmNic",
     "virtualNetworkName": "VNET",
@@ -251,9 +248,9 @@
         "typeHandlerVersion": "1.4",
         "settings": {
           "fileUris": [
-            "[concat(variables('templateUri'), variables('installScript')]"
+            "[concat(variables('scriptDownloadUri'), variables('installScript'))]"
           ],
-          "commandToExecute": "[concat(variables('commandPrefix'), variables('wgetCommandPrefix'), variables('adminUsername'), variables('wgetCommandPostfix'))]"
+          "commandToExecute": "[variables('installCommand')]"
         }
       }
     }
