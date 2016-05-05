@@ -9,9 +9,11 @@
 
 This template deploys the Open edX developer stack on Ubuntu.
 
-Connect to the virtual machine with SSH: `ssh vagrant@{dnsNameForPublicIP}.cloudapp.azure.com`. Installation log can be found under */var/log/azure*.
+Connect to the virtual machine with SSH: `ssh vagrant@{dnsNameForPublicIP}.{region}.cloudapp.azure.com`. Installation log can be found under */var/log/azure*.
 
 You can learn more about Open edX and devstack here:
 - [Open edX](https://open.edx.org)
 - [Running DevStack](https://openedx.atlassian.net/wiki/display/OpenOPS/Running+Devstack)
 - [Source Code](https://github.com/edx/edx-platform)
+
+*Note that this template uses a different license than the [Open edX](https://github.com/edx/edx-platform/blob/master/LICENSE) platform.*
