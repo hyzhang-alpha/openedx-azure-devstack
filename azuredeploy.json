@@ -41,7 +41,7 @@
   },
   "variables": {
     "adminUsername": "vagrant",
-    "vmName": "jumpbox2",
+    "vmName": "openedx-core",
     "availabilitySetNodes": "avail-set",
     "osImagePublisher": "Canonical",
     "osImageOffer": "UbuntuServer",
